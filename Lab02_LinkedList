@@ -1,0 +1,124 @@
+package structure;
+
+class Link
+{
+  public int value; // integer data
+  public Link next; // reference to next link
+}
+
+class LinkList
+{
+  private Link first; // ref to first Link on list
+  
+  public LinkList() {
+	  first = null;
+  }
+  
+  public static Link getnode(int value){
+	  Link n = new Link();
+	  n.value = value;
+	  n.next = null;
+	  return n;
+  }
+  
+  public void insertFirst(int value)
+  { // make new link
+	  Link newLink = getnode(value);
+	  newLink.next = first; // it points to old first link
+	  first = newLink; // now first points to this
+  }
+  
+  public boolean islempty()
+  {
+    return (first == null);
+  }
+  
+  public void printlst()
+  {
+    Link ptr = first;
+    while(ptr != null){
+      System.out.print(ptr.value + " ");
+      ptr =  ptr.next;   // next node
+    }
+  }
+  
+  // TODO: (1) add a method findMax() to return an index of the max element
+  public int findMax() {
+	  int max = first.value;
+      Link now = first;
+      
+      if (islempty()) {
+          return -1; 
+      }
+
+
+      while (now != null) {
+          if (now.value > max) {
+              max = now.value;
+          }
+          now = now.next;
+      }
+
+      return max;
+  }
+  
+  // TODO: (2) add a method removeMax() to remove the max element and shift all the elements up
+  public Integer removeMax() {
+	  Link now = first;
+      Link previous = null;
+      Link maxN = first;
+      Link maxPre = null;
+      
+      if (islempty()) {
+          System.out.println("Cannot find max. LinkedList is empty.");
+          return null;
+      }
+
+
+      while (now != null) {
+          if (now.value > maxN.value) {
+              maxN = now;
+              maxPre = previous;
+          }
+          previous = now;
+          now = now.next;
+      }
+
+     
+      if (maxPre == null) { 
+          first = maxN.next;
+      } else {
+    	  maxPre.next = maxN.next;
+      }
+
+      System.out.println(maxN.value + " has been removed.");
+      return maxN.value;
+  }
+
+}
+
+
+public class Lab02 {
+
+	public static void main(String[] args) {
+		LinkList numlist = new LinkList();
+		
+		numlist.insertFirst(28);
+		numlist.insertFirst(96);
+		numlist.insertFirst(75);
+		numlist.insertFirst(162);
+		
+		numlist.printlst();
+		System.out.println();
+		
+		
+			//System.out.println(numlist.findMax());
+		int max = numlist.findMax();
+            System.out.println("Index Number: " + max);
+        
+
+        numlist.removeMax();
+        numlist.printlst();
+	}
+
+}
