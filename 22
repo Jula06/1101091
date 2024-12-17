@@ -1,0 +1,46 @@
+// TODO: (1) add a method findMax() to return an index of the max element
+  public int findMax() {
+	  int max = first.value;
+      Link now = first;
+      
+      if (islempty()) {
+          return -1; 
+      }
+
+
+      while (now != null) {
+          if (now.value > max) {
+              max = now.value;
+          }
+          now = now.next;
+      }
+
+      return max;
+  }
+  
+  // TODO: (2) add a method removeMax() to remove the max element and shift all the elements up
+  public Integer removeMax() {
+	  Link now = first;
+      Link maxN = first;
+      Link maxPre = null;
+      
+      if (islempty()) {
+          System.out.println("Cannot find max. LinkedList is empty.");
+          return null;
+      }
+
+
+      while (now != null) {
+          	if (now.value > maxN.value) {
+              maxN = now;   
+          }
+         now = now.next;
+      }
+
+      		if (maxPre == null) { 
+          first = maxN.next;
+      } 
+      System.out.println(maxN.value + " has been removed.");
+      return maxN.value;
+  }
+}
