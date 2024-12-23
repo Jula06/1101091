@@ -1,0 +1,78 @@
+package structure;
+
+
+import java.util.Scanner;
+
+class StackA {
+    public int maxSize=5 ;          // size of stack array
+    public String[] stackArray;  
+    public int top;              	// top of stack
+
+    //--------------------------------------------------------------
+    public StackA(int s) {       // constructor
+        maxSize = s;             // set array size
+        stackArray = new String[maxSize]; // create array
+        top = -1;                // no items yet
+    }
+
+    //--------------------------------------------------------------
+    public void push(String j) { // put item on top of stack
+        if (!isFull()) {        
+            stackArray[++top] = j; // increment top and insert item
+        } else {
+            System.out.println("Stack is full. Cannot push data.");
+        }
+    }
+
+    //--------------------------------------------------------------
+    public String pop() { // take item from top of stack
+        if (!isEmpty()) { 
+            return stackArray[top--]; // access item, decrement top (pop data)
+            } else {
+            System.out.println("Stack is empty. Cannot pop data.");
+            return null;
+        }
+    }
+
+    //--------------------------------------------------------------
+    public boolean isEmpty() { // true if stack is empty
+        return (top == -1);
+    }
+
+    //--------------------------------------------------------------
+    public boolean isFull() { // true if stack is full
+        return (top == maxSize - 1);
+    }
+
+} // end class StackA
+
+public class Lab03 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int stackSize = 5;      
+        StackA stack = new StackA(stackSize); 
+
+        
+        
+        for (int i = 0; i < stackSize; i++) {
+            System.out.print("Push Data " + (i + 1) + " : ");
+            String inputData = scanner.next(); 
+            stack.push(inputData);
+        }
+
+        System.out.print("--------------------------");
+
+        
+        if (!stack.isEmpty()) {
+            
+            for (int i = 0; i < stackSize; i++) {
+                String popData = stack.pop(); 
+                System.out.println("Pop Data " + (i+1) + " : " + popData);
+            }
+        }
+
+        System.out.println(" ");
+        scanner.close();
+    }
+}
